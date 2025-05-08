@@ -3,6 +3,7 @@ package utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,19 +25,17 @@ public class TestBase {
 
         if (driver == null) {
             if (browser.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/test/resources/chromedriver.exe");
+                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
             } else if (browser.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/test/resources/geckodriver.exe");
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }
 
-            // Maximize the browser window
+            // Maximize to full screen
             driver.manage().window().maximize();
 
-            // Optional: set an implicit wait
-            // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
+            // Navigate to URL
             driver.get(url);
         }
         return driver;
