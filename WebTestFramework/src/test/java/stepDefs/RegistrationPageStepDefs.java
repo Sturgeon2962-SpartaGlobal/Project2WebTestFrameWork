@@ -56,6 +56,7 @@ public class RegistrationPageStepDefs {
     public void the_user_clicks_the_register_button() {
         registrationPage.SubmitForm();
     }
+
     @Then("the user should be redirected to the welcome page")
     public void the_user_should_be_redirected_to_the_welcome_page() throws IOException {
         String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();
