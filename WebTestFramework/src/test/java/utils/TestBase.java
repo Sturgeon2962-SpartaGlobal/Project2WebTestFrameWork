@@ -34,7 +34,7 @@ public class TestBase {
                 String userDataDir = Files.createTempDirectory("chrome-user-data").toString();
 
                 ChromeOptions options = new ChromeOptions();
-//                options.addArguments("--headless=new"); // Use modern headless mode
+                options.addArguments("--headless=new"); // Use modern headless mode
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
@@ -52,7 +52,7 @@ public class TestBase {
 
                 driver = new FirefoxDriver();
                 FirefoxOptions options = new FirefoxOptions();
-//                options.addArguments("--headless=new"); // Use modern headless mode
+                options.addArguments("--headless=new"); // Use modern headless mode
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
