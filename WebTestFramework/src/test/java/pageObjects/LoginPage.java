@@ -1,7 +1,13 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     public WebDriver driver;
@@ -10,8 +16,24 @@ public class LoginPage {
     }
 
     private By registerBtn = By.xpath("//button[@class='mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base']");
+    private By userNameInput = By.cssSelector("input[placeholder*=\"Username\"]");
+    private By passwordInput = By.cssSelector("input[placeholder*=\"Password\"]");
+    private By submitForm = By.cssSelector("button[class='mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base cdk-focused cdk-mouse-focused'] span[class='mdc-button__label']");
 
     public void selectRegisterBtn() {
         driver.findElement(registerBtn).click();
+    }
+
+    public void CompleteLoginForm(String username, String password) {
+        driver.findElement(userNameInput).sendKeys(username);
+        driver.findElement(passwordInput).sendKeys(password);
+    }
+
+
+    public void SubmitLoginForm() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
+//        loginButton.click();
+        driver.findElement(submitForm).click();
     }
 }

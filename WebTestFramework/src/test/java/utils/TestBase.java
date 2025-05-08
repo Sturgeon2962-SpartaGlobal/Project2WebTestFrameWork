@@ -16,7 +16,7 @@ import java.nio.file.Files;
 public class TestBase {
     public WebDriver driver;
 
-    public WebDriver WebDriverManager() throws IOException {
+    public WebDriver WebDriverManager() throws IOException, InterruptedException {
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/global.properties");
         Properties prop = new Properties();
         prop.load(fis);
@@ -34,12 +34,13 @@ public class TestBase {
                 String userDataDir = Files.createTempDirectory("chrome-user-data").toString();
 
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless=new"); // Use modern headless mode
+//                options.addArguments("--headless=new"); // Use modern headless mode
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
-                options.addArguments("--window-size=1920,1080");
+//                options.addArguments("--window-size=1920,1080");
                 options.addArguments("--user-data-dir=" + userDataDir);
+                options.addArguments("--start-maximized");
 
                 driver = new ChromeDriver(options);
 
@@ -51,15 +52,17 @@ public class TestBase {
 
                 driver = new FirefoxDriver();
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless=new"); // Use modern headless mode
+//                options.addArguments("--headless=new"); // Use modern headless mode
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
-                options.addArguments("--window-size=1920,1080");
+//                options.addArguments("--window-size=1920,1080");
                 options.addArguments("--user-data-dir=" + userDataDir);
+                options.addArguments("--start-maximized");
             }
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+//            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+            Thread.sleep(1000);
             driver.get(url);
         }
 
