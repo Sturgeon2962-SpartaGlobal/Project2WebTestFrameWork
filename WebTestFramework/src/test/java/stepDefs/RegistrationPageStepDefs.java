@@ -69,4 +69,11 @@ public class RegistrationPageStepDefs {
         String errorMsg = registrationPage.GetUserNameErrorMsg();
         MatcherAssert.assertThat(errorMsg, Matchers.containsString("User Name is not available"));
     }
+
+    @Then("the error message {string} Should be displyed")
+    public void theErrorMessageShouldBeDisplyed(String errorMessage) {
+        String webErrorMsg = registrationPage.GetWeakPasswordErrorMsg();
+        MatcherAssert.assertThat(webErrorMsg, Matchers.containsString(errorMessage));
+    }
+
 }

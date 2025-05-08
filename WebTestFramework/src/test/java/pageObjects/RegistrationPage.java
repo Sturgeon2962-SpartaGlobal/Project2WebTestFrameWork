@@ -22,6 +22,7 @@ public class RegistrationPage {
     private By femaleRadioBtn = By.xpath("//mat-radio-group/mat-radio-button[2]");
     private By submitForm = By.xpath("//form/mat-card-actions/button");
     private By userNameErrorMsg = By.xpath("//mat-form-field[3]/div[2]/div/mat-error");
+    private By weakPasswordErrorMsg = By.xpath("//mat-form-field[4]/div[2]/div/mat-error");
 
     public void CompleteForm(String firstName, String lastName, String userName, String password1, String password2, String gender) throws InterruptedException {
         driver.findElement(firstNameInput).sendKeys(firstName);
@@ -50,5 +51,9 @@ public class RegistrationPage {
 
     public String GetUserNameErrorMsg(){
         return driver.findElement(userNameErrorMsg).getText();
+    }
+
+    public String GetWeakPasswordErrorMsg() {
+        return driver.findElement(weakPasswordErrorMsg).getText();
     }
 }
