@@ -49,7 +49,7 @@ public class RegistrationPageStepDefs {
                 password2,
                 gender
         );
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
     }
 
     @When("the user clicks the Register button")
