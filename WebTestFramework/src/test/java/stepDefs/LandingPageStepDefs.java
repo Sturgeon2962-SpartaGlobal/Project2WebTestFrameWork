@@ -39,7 +39,7 @@ public class LandingPageStepDefs {
         MatcherAssert.assertThat(actualURL, Matchers.is(ExpectedURL));
     }
     @When("I enter {string} into the search bar")
-    public void i_enter_into_the_search_bar(String title) {
+    public void i_enter_into_the_search_bar(String title) throws InterruptedException {
         landingPage.searchTitle(title);
     }
     @Then("I should see a list of books with {string} in the title or author")
