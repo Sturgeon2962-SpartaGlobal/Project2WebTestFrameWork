@@ -34,7 +34,7 @@ public class TestBase {
                 String userDataDir = Files.createTempDirectory("chrome-user-data").toString();
 
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless=new"); // Use modern headless mode
+//                options.addArguments("--headless=new"); // Use modern headless mode
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
@@ -50,20 +50,22 @@ public class TestBase {
                 String userDataDir = Files.createTempDirectory("firefox-user-data").toString();
 
 
-                driver = new FirefoxDriver();
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless=new"); // Use modern headless mode
+//                options.addArguments("--headless=new"); // Use modern headless mode
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
 //                options.addArguments("--window-size=1920,1080");
                 options.addArguments("--user-data-dir=" + userDataDir);
                 options.addArguments("--start-maximized");
+
+                driver = new FirefoxDriver();
             }
 
 //            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-            Thread.sleep(1000);
             driver.get(url);
+            Thread.sleep(1000);
+
         }
 
         return driver;

@@ -3,10 +3,9 @@ Feature: User Registration
   I want to log in so that I can access my account.
 
   @ValidUser
-  @Suite2
+  @Suite1
   Scenario: Valid Login
-    Given I am a registered user
-    And I am on the login page
-    When I enter valid credentials
+    Given I have navigated to the login page
+    When I complete the log-in form with valid log-in credentials
     And I click the login button
     Then I should be redirected to the homepage

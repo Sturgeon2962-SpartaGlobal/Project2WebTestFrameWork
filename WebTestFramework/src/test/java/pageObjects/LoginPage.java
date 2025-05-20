@@ -18,7 +18,7 @@ public class LoginPage {
     private By registerBtn = By.xpath("//button[@class='mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base']");
     private By userNameInput = By.cssSelector("input[placeholder*=\"Username\"]");
     private By passwordInput = By.cssSelector("input[placeholder*=\"Password\"]");
-    private By submitForm = By.cssSelector("button[class='mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base cdk-focused cdk-mouse-focused'] span[class='mdc-button__label']");
+    private By submitForm = By.xpath("//form/mat-card-actions/button");
 
     public void selectRegisterBtn() {
         driver.findElement(registerBtn).click();
@@ -30,10 +30,9 @@ public class LoginPage {
     }
 
 
-    public void SubmitLoginForm() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
-//        loginButton.click();
+    public void SubmitLoginForm() throws InterruptedException {
+        Thread.sleep(500);
+//        driver.findElement(passwordInput).sendKeys(Keys.RETURN);
         driver.findElement(submitForm).click();
     }
 }
