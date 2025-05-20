@@ -29,11 +29,11 @@ public class RegistrationPageStepDefs {
 
     @Given("the user is on the registration page")
     public void the_user_is_on_the_registration_page() throws IOException, InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(500);
         landingPage.selectLoginBtn();
-        Thread.sleep(1000);
+        Thread.sleep(500);
         loginPage.selectRegisterBtn();
-        Thread.sleep(1000);
+        Thread.sleep(500);
         String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();
         String expectedURL = "https://bookcart.azurewebsites.net/register";
         MatcherAssert.assertThat(actualURL, Matchers.is(expectedURL));
@@ -58,7 +58,7 @@ public class RegistrationPageStepDefs {
     }
 
     @Then("the user should be redirected to the welcome page")
-    public void the_user_should_be_redirected_to_the_welcome_page() throws IOException {
+    public void the_user_should_be_redirected_to_the_welcome_page() throws IOException, InterruptedException {
         String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();
         String expectedURL = "https://bookcart.azurewebsites.net/register";
         MatcherAssert.assertThat(actualURL, Matchers.is(expectedURL));

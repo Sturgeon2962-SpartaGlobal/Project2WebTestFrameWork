@@ -3,7 +3,7 @@ Feature: User Registration
   I want to register an account so that i can purchase books
 
   @NewUser
-  @Suite1
+  @Suite2
   Scenario: Successful Registration
     Given the user is on the registration page
     When the user enters "first", "last", "username", "ValidPa55word!", "ValidPa55word!" and "Male"

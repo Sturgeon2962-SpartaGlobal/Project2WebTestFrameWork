@@ -20,7 +20,7 @@ public class Hooks {
     }
 
     @AfterStep
-    public void afterStep(Scenario scenario) throws IOException {
+    public void afterStep(Scenario scenario) throws IOException, InterruptedException {
         WebDriver driver = testContextSetup.testBase.WebDriverManager();
 
         if (scenario.isFailed()) {
@@ -31,7 +31,7 @@ public class Hooks {
     }
 
     @After
-    public void AfterScenario() throws IOException {
+    public void AfterScenario() throws IOException, InterruptedException {
         testContextSetup.testBase.WebDriverManager().quit();
     }
 }
