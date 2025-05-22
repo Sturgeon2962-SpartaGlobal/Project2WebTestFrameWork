@@ -13,4 +13,4 @@ Feature: Book Search
   Scenario: Add the same book multiple times
     Given I have already added a book to the cart
     When I click on Add to Cart button
-    Then the quantity of that book in the cart should increase by 1
+    Then the quantity of that book in the cart should increase to 2

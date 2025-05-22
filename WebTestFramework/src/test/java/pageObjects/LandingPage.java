@@ -20,6 +20,7 @@ public class LandingPage {
     private By searchBar = By.cssSelector(".mat-mdc-autocomplete-trigger");
     private By bookCards = By.cssSelector(".p-1.ng-star-inserted");
     private By noBookFound = By.cssSelector(".display-4");
+    private By bookCard = By.xpath("/html/body/app-root/div/app-home/div/div[2]/div/div[1]/app-book-card/mat-card");
 
     public void selectLoginBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -57,5 +58,9 @@ public class LandingPage {
 
     public String getErrorMsg() {
         return driver.findElement(noBookFound).getText();
+    }
+
+    public void clickOnBookCard() {
+        driver.findElement(bookCard).click();
     }
 }
