@@ -7,9 +7,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.LandingPage;
-import pageObjects.LoginPage;
-import pageObjects.RegistrationPage;
+import pageObjects.*;
 import utils.TestContextSetup;
 
 import java.io.IOException;
@@ -21,6 +19,9 @@ public class LandingPageStepDefs {
     RegistrationPage registrationPage;
     LoginPage loginPage;
     LandingPage landingPage;
+    BookPage bookPage;
+    CartPage cartPage;
+    CheckoutPage checkoutPage;
     WebDriverWait wait;
 
     public LandingPageStepDefs(TestContextSetup testContextSetup) throws IOException, InterruptedException {
@@ -28,6 +29,9 @@ public class LandingPageStepDefs {
         this.registrationPage = testContextSetup.pageObjectManager.getRegistrationPage();
         this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
         this.landingPage = testContextSetup.pageObjectManager.getLandingPage();
+        this.bookPage = testContextSetup.pageObjectManager.getBookPage();
+        this.cartPage = testContextSetup.pageObjectManager.getCartPage();
+        this.checkoutPage = testContextSetup.pageObjectManager.getCheckoutPage();
         this.wait =  new WebDriverWait(testContextSetup.testBase.WebDriverManager(), Duration.ofSeconds(20));
     }
 
@@ -38,10 +42,12 @@ public class LandingPageStepDefs {
         String ExpectedURL = "https://bookcart.azurewebsites.net/";
         MatcherAssert.assertThat(actualURL, Matchers.is(ExpectedURL));
     }
+
     @When("I enter {string} into the search bar")
     public void i_enter_into_the_search_bar(String title) throws InterruptedException {
         landingPage.searchTitle(title);
     }
+
     @Then("I should see a list of books with {string} in the title or author")
     public void i_should_see_a_list_of_books_with_in_the_title_or_author(String title) {
         List<String> bookTitles = landingPage.getAllBooks();
@@ -57,4 +63,8 @@ public class LandingPageStepDefs {
         MatcherAssert.assertThat(errorMsg, Matchers.containsString(expectedErrorMsg));
     }
 
+    @Given("I have books in my cart")
+    public void iHaveBooksInMyCart() throws InterruptedException {
+        landingPage.addBookToCart();
+    }
 }

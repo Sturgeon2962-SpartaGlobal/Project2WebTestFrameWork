@@ -7,10 +7,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.BookPage;
-import pageObjects.LandingPage;
-import pageObjects.LoginPage;
-import pageObjects.RegistrationPage;
+import pageObjects.*;
 import utils.TestContextSetup;
 
 import java.io.IOException;
@@ -22,6 +19,8 @@ public class BookPageStepDefs {
     LoginPage loginPage;
     LandingPage landingPage;
     BookPage bookPage;
+    CartPage cartPage;
+    CheckoutPage checkoutPage;
     WebDriverWait wait;
 
     public BookPageStepDefs(TestContextSetup testContextSetup) throws IOException, InterruptedException {
@@ -30,6 +29,8 @@ public class BookPageStepDefs {
         this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
         this.landingPage = testContextSetup.pageObjectManager.getLandingPage();
         this.bookPage = testContextSetup.pageObjectManager.getBookPage();
+        this.cartPage = testContextSetup.pageObjectManager.getCartPage();
+        this.checkoutPage = testContextSetup.pageObjectManager.getCheckoutPage();
         this.wait =  new WebDriverWait(testContextSetup.testBase.WebDriverManager(), Duration.ofSeconds(20));
     }
 
@@ -51,7 +52,6 @@ public class BookPageStepDefs {
     @Then("the item should appear in my cart with quantity 1")
     public void theItemShouldAppearInMyCartWithQuantity1() throws InterruptedException {
         int cartCount = bookPage.getCartCount();
-        Thread.sleep(1000);
         MatcherAssert.assertThat(cartCount, Matchers.equalTo(1));
     }
 
@@ -67,7 +67,6 @@ public class BookPageStepDefs {
     @Then("the quantity of that book in the cart should increase to {int}")
     public void theQuantityOfThatBookInTheCartShouldIncreaseBy(Integer count) throws InterruptedException {
         System.out.println("The quantity of that book in the cart should increase to {int}");
-        Thread.sleep(10000);
         int cartCount = bookPage.getCartCount();
         System.out.println("Cart count is: " + cartCount);
         MatcherAssert.assertThat(cartCount, Matchers.equalTo(count));

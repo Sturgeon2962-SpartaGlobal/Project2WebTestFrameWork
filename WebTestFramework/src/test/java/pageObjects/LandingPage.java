@@ -21,6 +21,9 @@ public class LandingPage {
     private By bookCards = By.cssSelector(".p-1.ng-star-inserted");
     private By noBookFound = By.cssSelector(".display-4");
     private By bookCard = By.xpath("/html/body/app-root/div/app-home/div/div[2]/div/div[1]/app-book-card/mat-card");
+    private By addToCartBtn = By.xpath("/html/body/app-root/div/app-home/div/div[2]/div/div[1]/app-book-card/mat-card/mat-card-content/app-addtocart/button");
+    private By cartIcon = By.xpath("/html/body/app-root/app-nav-bar/mat-toolbar/mat-toolbar-row/div[3]/button[2]");
+
 
     public void selectLoginBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -62,5 +65,14 @@ public class LandingPage {
 
     public void clickOnBookCard() {
         driver.findElement(bookCard).click();
+    }
+
+    public void addBookToCart() throws InterruptedException {
+        Thread.sleep(500);
+        driver.findElement(addToCartBtn).click();
+    }
+
+    public void clickOnCartIcon() {
+        driver.findElement(cartIcon).click();
     }
 }
