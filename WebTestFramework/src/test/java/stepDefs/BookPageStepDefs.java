@@ -1,0 +1,56 @@
+package stepDefs;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.BookPage;
+import pageObjects.LandingPage;
+import pageObjects.LoginPage;
+import pageObjects.RegistrationPage;
+import utils.TestContextSetup;
+
+import java.io.IOException;
+import java.time.Duration;
+
+public class BookPageStepDefs {
+    TestContextSetup testContextSetup;
+    RegistrationPage registrationPage;
+    LoginPage loginPage;
+    LandingPage landingPage;
+    BookPage bookPage;
+    WebDriverWait wait;
+
+    public BookPageStepDefs(TestContextSetup testContextSetup) throws IOException, InterruptedException {
+        this.testContextSetup = testContextSetup;
+        this.registrationPage = testContextSetup.pageObjectManager.getRegistrationPage();
+        this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
+        this.landingPage = testContextSetup.pageObjectManager.getLandingPage();
+        this.bookPage = testContextSetup.pageObjectManager.getBookPage();
+        this.wait =  new WebDriverWait(testContextSetup.testBase.WebDriverManager(), Duration.ofSeconds(20));
+    }
+
+
+    @Given("I am viewing a book's detail page")
+    public void iAmViewingABooksDetailPage() throws IOException {
+        landingPage.clickOnBookCard();
+        wait.until(ExpectedConditions.urlToBe("https://bookcart.azurewebsites.net/books/details/2"));
+        String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();;
+        String ExpectedURL = "https://bookcart.azurewebsites.net/books/details/2";
+        MatcherAssert.assertThat(actualURL, Matchers.is(ExpectedURL));
+    }
+
+    @When("I click on Add to Cart button")
+    public void iClickOnAddToCartButton(){
+        bookPage.AddToCart();
+
+    }
+
+    @Then("the item should appear in my cart with quantity 1")
+    public void theItemShouldAppearInMyCartWithQuantity1(){
+        System.out.println("The item should appear in my cart with quantity 1");
+    }
+}

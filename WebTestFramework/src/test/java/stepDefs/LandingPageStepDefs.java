@@ -52,8 +52,9 @@ public class LandingPageStepDefs {
     }
 
     @Then("I should see a {string} message")
-    public void iShouldSeeAMessage(String expectedErrorMsg) {
+    public void i_Should_See_A_Message(String expectedErrorMsg) {
         String errorMsg = landingPage.getErrorMsg();
         MatcherAssert.assertThat(errorMsg, Matchers.containsString(expectedErrorMsg));
     }
+
 }

@@ -1,9 +1,6 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,19 +27,29 @@ public class LandingPage {
         driver.findElement(loginBtn).click();
     }
 
-    public void searchTitle(String title) {
+    public void searchTitle(String title) throws InterruptedException {
         driver.findElement(searchBar).sendKeys(title);
+        Thread.sleep(500);
         driver.findElement(searchBar).sendKeys(Keys.ENTER);
 
     }
 
     public List<String> getAllBooks() {
-        List<WebElement> books = driver.findElements(bookCards);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(bookCards));
+
+        List<WebElement> books = driver.findElements(bookCards);
         List<String> bookTitles = new ArrayList<>();
-        for (WebElement book : books) {
-            String bookTitle = book.getText().toLowerCase();
-            bookTitles.add(bookTitle);
+
+        for (int i = 0; i < books.size(); i++) {
+            try {
+                WebElement book = driver.findElements(bookCards).get(i);
+                bookTitles.add(book.getText().toLowerCase());
+            } catch (StaleElementReferenceException e) {
+                WebElement book = driver.findElements(bookCards).get(i);
+                bookTitles.add(book.getText().toLowerCase());
+            }
         }
 
         return bookTitles;
