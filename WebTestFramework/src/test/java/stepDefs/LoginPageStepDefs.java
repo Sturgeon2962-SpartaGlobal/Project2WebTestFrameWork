@@ -52,8 +52,9 @@ public class LoginPageStepDefs {
 
     @Then("I should be redirected to the homepage")
     public void iShouldBeRedirectedToTheHomepage() throws InterruptedException, IOException {
+        wait.until(ExpectedConditions.urlToBe("https://bookcart.azurewebsites.net/"));
         String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();
-        String expectedURL = "https://bookcart.azurewebsites.net";
+        String expectedURL = "https://bookcart.azurewebsites.net/";
         MatcherAssert.assertThat(actualURL, Matchers.is(expectedURL));
     }
 
