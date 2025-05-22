@@ -17,15 +17,14 @@ public class TestBase {
     public WebDriver driver;
 
     public WebDriver WebDriverManager() throws IOException {
-        // Load properties
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/global.properties");
         Properties prop = new Properties();
-        try (FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/global.properties")) {
-            prop.load(fis);
-        }
-
+        prop.load(fis);
         String url = prop.getProperty("QAUrl");
-        String browser = System.getProperty("browser", prop.getProperty("browser"));
+        String browser_properties = prop.getProperty("browser");
+        String browser_maven = System.getProperty("browser");
 
+        String browser = browser_maven != null ? browser_maven : browser_properties;
 
         if (driver == null) {
             if (browser.equalsIgnoreCase("chrome")) {
@@ -34,35 +33,28 @@ public class TestBase {
                 String userDataDir = Files.createTempDirectory("chrome-user-data").toString();
 
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless=new"); // Use modern headless mode
+                options.addArguments("--headless=new");
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
-//                options.addArguments("--window-size=1920,1080");
-                options.addArguments("--user-data-dir=" + userDataDir);
 //                options.addArguments("--start-maximized");
+                options.addArguments("--user-data-dir=" + userDataDir);
 
                 driver = new ChromeDriver(options);
 
             } else if (browser.equalsIgnoreCase("firefox")) {
                 WebDriverManager.firefoxdriver().setup();
 
-                String userDataDir = Files.createTempDirectory("chrome-user-data").toString();
-
-
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless=new"); // Use modern headless mode
-                options.addArguments("--no-sandbox");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--disable-gpu");
-//                options.addArguments("--window-size=1920,1080");
-                options.addArguments("--user-data-dir=" + userDataDir);
-//                options.addArguments("--start-maximized");
+                options.addArguments("--headless"); // Remove this line if you want a visible window
 
                 driver = new FirefoxDriver(options);
+
+                // Maximize after starting (works even in headless mode in some environments)
+//                driver.manage().window().maximize();
             }
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
             driver.get(url);
         }
 

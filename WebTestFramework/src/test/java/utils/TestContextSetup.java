@@ -8,6 +8,7 @@ public class TestContextSetup {
     public PageObjectManager pageObjectManager;
     public TestBase testBase;
     public GenericUtils genericUtils;
+
     public TestContextSetup() throws Exception {
         this.testBase = new TestBase();
         this.pageObjectManager = new PageObjectManager(testBase.WebDriverManager());
