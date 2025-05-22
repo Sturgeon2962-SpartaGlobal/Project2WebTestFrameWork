@@ -1,3 +1,4 @@
+@BookSearch
 Feature: Book Search
   As a user,
   I want to search for books so that I can find titles of interest.

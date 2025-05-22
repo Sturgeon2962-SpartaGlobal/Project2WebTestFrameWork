@@ -1,4 +1,5 @@
-Feature: User Registration
+@UserLogin
+Feature: User Login
   As a returning user,
   I want to log in so that I can access my account.
 
