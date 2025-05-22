@@ -6,12 +6,12 @@ import io.cucumber.java.en.When;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import pageObjects.LandingPage;
-import pageObjects.LoginPage;
-import pageObjects.RegistrationPage;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.*;
 import utils.TestContextSetup;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.regex.Matcher;
 
 public class RegistrationPageStepDefs {
@@ -19,12 +19,20 @@ public class RegistrationPageStepDefs {
     RegistrationPage registrationPage;
     LoginPage loginPage;
     LandingPage landingPage;
+    BookPage bookPage;
+    CartPage cartPage;
+    CheckoutPage checkoutPage;
+    WebDriverWait wait;
 
-    public RegistrationPageStepDefs(TestContextSetup testContextSetup){
+    public RegistrationPageStepDefs(TestContextSetup testContextSetup) throws IOException, InterruptedException {
         this.testContextSetup = testContextSetup;
         this.registrationPage = testContextSetup.pageObjectManager.getRegistrationPage();
         this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
         this.landingPage = testContextSetup.pageObjectManager.getLandingPage();
+        this.bookPage = testContextSetup.pageObjectManager.getBookPage();
+        this.cartPage = testContextSetup.pageObjectManager.getCartPage();
+        this.checkoutPage = testContextSetup.pageObjectManager.getCheckoutPage();
+        this.wait =  new WebDriverWait(testContextSetup.testBase.WebDriverManager(), Duration.ofSeconds(20));
     }
 
     @Given("the user is on the registration page")

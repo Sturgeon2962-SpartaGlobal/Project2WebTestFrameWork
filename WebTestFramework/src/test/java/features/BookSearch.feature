@@ -1,3 +1,4 @@
+@BasicSuite
 @BookSearch
 Feature: Book Search
   As a user,

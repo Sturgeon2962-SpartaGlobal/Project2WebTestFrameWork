@@ -7,9 +7,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.LandingPage;
-import pageObjects.LoginPage;
-import pageObjects.RegistrationPage;
+import pageObjects.*;
 import utils.TestContextSetup;
 
 import java.io.IOException;
@@ -20,6 +18,9 @@ public class LoginPageStepDefs {
     RegistrationPage registrationPage;
     LoginPage loginPage;
     LandingPage landingPage;
+    BookPage bookPage;
+    CartPage cartPage;
+    CheckoutPage checkoutPage;
     WebDriverWait wait;
 
     public LoginPageStepDefs(TestContextSetup testContextSetup) throws IOException, InterruptedException {
@@ -27,6 +28,9 @@ public class LoginPageStepDefs {
         this.registrationPage = testContextSetup.pageObjectManager.getRegistrationPage();
         this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
         this.landingPage = testContextSetup.pageObjectManager.getLandingPage();
+        this.bookPage = testContextSetup.pageObjectManager.getBookPage();
+        this.cartPage = testContextSetup.pageObjectManager.getCartPage();
+        this.checkoutPage = testContextSetup.pageObjectManager.getCheckoutPage();
         this.wait =  new WebDriverWait(testContextSetup.testBase.WebDriverManager(), Duration.ofSeconds(20));
     }
 
@@ -48,9 +52,18 @@ public class LoginPageStepDefs {
 
     @Then("I should be redirected to the homepage")
     public void iShouldBeRedirectedToTheHomepage() throws InterruptedException, IOException {
+        wait.until(ExpectedConditions.urlToBe("https://bookcart.azurewebsites.net/"));
         String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();
-        String expectedURL = "https://bookcart.azurewebsites.net";
+        String expectedURL = "https://bookcart.azurewebsites.net/";
         MatcherAssert.assertThat(actualURL, Matchers.is(expectedURL));
+    }
+
+    @Given("I am logged in")
+    public void iAmLoggedIn() throws InterruptedException {
+        landingPage.selectLoginBtn();
+        Thread.sleep(500);
+        loginPage.CompleteLoginForm("SoftwareTest1", "ValidPa55word!");
+        loginPage.SubmitLoginForm();
     }
 
 }

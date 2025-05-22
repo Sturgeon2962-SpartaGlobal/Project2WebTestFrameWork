@@ -1,3 +1,4 @@
+@BasicSuite
 @UserLogin
 Feature: User Login
   As a returning user,
