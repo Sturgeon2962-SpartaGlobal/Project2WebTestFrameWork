@@ -1,3 +1,4 @@
+@BasicSuite
 @CheckoutProcess
 Feature: Checkout Process
   As a user,

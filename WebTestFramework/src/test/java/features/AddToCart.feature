@@ -1,5 +1,6 @@
+@BasicSuite
 @AddToCart
-Feature: Book Search
+Feature: AddToCart
   As a user,
   I want to add books to my cart so that I can purchase them later.
 
