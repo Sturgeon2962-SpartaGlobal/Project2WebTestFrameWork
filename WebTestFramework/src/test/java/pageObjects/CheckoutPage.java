@@ -26,26 +26,27 @@ public class CheckoutPage {
     private By placeOrderBtn = By.xpath("//form/mat-card-actions/button[1]");
     private By errorMsgs = By.cssSelector(".ng-untouched.ng-pristine.ng-invalid.ng-submitted");
 
-    public void completeShippingForm() {
+    public void completeShippingForm() throws InterruptedException {
+        Thread.sleep(100);
         driver.findElement(nameField).sendKeys("John Doe");
+        Thread.sleep(100);
         driver.findElement(addressLine1).sendKeys("123 Main St");
+        Thread.sleep(100);
         driver.findElement(addressLine2).sendKeys("TownCentre");
+        Thread.sleep(100);
         driver.findElement(pincodeField).sendKeys("123456");
+        Thread.sleep(100);
         driver.findElement(state).sendKeys("Washington");
+        Thread.sleep(100);
+
 //        driver.findElement(placeOrderBtn).click();
     }
 
     public void submitShippingForm() throws InterruptedException {
         WebElement button = driver.findElement(placeOrderBtn);
+        Thread.sleep(250);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", button);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(
-                ExpectedConditions.invisibilityOfElementLocated(
-                        By.cssSelector(
-                                ".mdc-button.mdc-button--raised.mat-mdc-raised-button.mat-primary.mat-mdc-button-base"
-                        )
-                )
-        );
+        Thread.sleep(250);
         button.click();
     }
 

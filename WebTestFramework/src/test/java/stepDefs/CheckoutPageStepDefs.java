@@ -49,7 +49,7 @@ public class CheckoutPageStepDefs {
     }
 
     @When("I enter valid payment information")
-    public void iEnterValidPaymentInformation() {
+    public void iEnterValidPaymentInformation() throws InterruptedException {
         checkoutPage.completeShippingForm();
     }
 

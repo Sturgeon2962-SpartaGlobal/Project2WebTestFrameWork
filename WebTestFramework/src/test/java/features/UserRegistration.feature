@@ -1,3 +1,4 @@
+@UserRegistration
 Feature: User Registration
   As a new user,
   I want to register an account so that i can purchase books

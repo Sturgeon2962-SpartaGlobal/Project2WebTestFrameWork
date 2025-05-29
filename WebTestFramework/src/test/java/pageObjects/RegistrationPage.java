@@ -21,7 +21,7 @@ public class RegistrationPage {
 //    private By femaleRadioBtn = By.xpath("//mat-radio-group/mat-radio-button[2]/div/div/input");
     private By femaleRadioBtn = By.xpath("//mat-radio-group/mat-radio-button[2]");
     private By submitForm = By.xpath("//form/mat-card-actions/button");
-    private By userNameErrorMsg = By.xpath("//mat-form-field[3]/div[2]/div/mat-error");
+    private By userNameErrorMsg = By.xpath("//form/mat-form-field[3]/div[2]/div/mat-error");
     private By weakPasswordErrorMsg = By.xpath("//mat-form-field[4]/div[2]/div/mat-error");
 
     public void CompleteForm(String firstName, String lastName, String userName, String password1, String password2, String gender) throws InterruptedException {
@@ -42,6 +42,7 @@ public class RegistrationPage {
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
         Thread.sleep(500);
+        assert radio != null;
         radio.click();
     }
 
@@ -49,7 +50,8 @@ public class RegistrationPage {
         driver.findElement(submitForm).click();
     }
 
-    public String GetUserNameErrorMsg(){
+    public String GetUserNameErrorMsg() throws InterruptedException {
+        Thread.sleep(250);
         return driver.findElement(userNameErrorMsg).getText();
     }
 

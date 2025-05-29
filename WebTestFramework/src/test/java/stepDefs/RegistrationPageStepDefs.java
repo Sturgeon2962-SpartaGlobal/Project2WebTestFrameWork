@@ -73,7 +73,7 @@ public class RegistrationPageStepDefs {
     }
 
     @Then("the user should see an username all ready taken")
-    public void theUserShouldSeeAnUserNameNotAvailableError() {
+    public void theUserShouldSeeAnUserNameNotAvailableError() throws InterruptedException {
         String errorMsg = registrationPage.GetUserNameErrorMsg();
         MatcherAssert.assertThat(errorMsg, Matchers.containsString("User Name is not available"));
     }

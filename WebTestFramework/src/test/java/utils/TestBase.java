@@ -46,12 +46,12 @@ public class TestBase {
                 WebDriverManager.firefoxdriver().setup();
 
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless"); // Remove this line if you want a visible window
+//                options.addArguments("--headless"); // Remove this line if you want a visible window
 
                 driver = new FirefoxDriver(options);
 
                 // Maximize after starting (works even in headless mode in some environments)
-//                driver.manage().window().maximize();
+                driver.manage().window().maximize();
             }
 
             assert driver != null;

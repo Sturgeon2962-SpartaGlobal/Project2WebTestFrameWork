@@ -47,29 +47,29 @@ public class BookPageStepDefs {
     public void iClickOnAddToCartButton() throws InterruptedException {
         System.out.println("Click on Add to Cart button");
         bookPage.AddToCart();
-        Thread.sleep(250);
+        Thread.sleep(500);
     }
 
-    @Then("the item should appear in my cart with quantity 1")
-    public void theItemShouldAppearInMyCartWithQuantity1() throws InterruptedException {
+    @Then("the item should appear in my cart with quantity {string}")
+    public void theItemShouldAppearInMyCartWithQuantity1(String numOfBooks) throws InterruptedException {
         String cartCount = bookPage.getCartCount();
-        MatcherAssert.assertThat(cartCount, Matchers.equalTo(1));
+        MatcherAssert.assertThat(cartCount, Matchers.equalTo(numOfBooks));
     }
 
     @Given("I have already added a book to the cart")
-    public void iHaveAlreadyAddedABookToTheCart() {
+    public void iHaveAlreadyAddedABookToTheCart() throws InterruptedException {
         System.out.println("I have already added a book to the cart");
         landingPage.clickOnBookCard();
         bookPage.AddToCart();
+        Thread.sleep(500);
         String cartCount = bookPage.getCartCount();
         MatcherAssert.assertThat(cartCount, Matchers.is("1"));
     }
 
-    @Then("the quantity of that book in the cart should increase to {int}")
-    public void theQuantityOfThatBookInTheCartShouldIncreaseBy(Integer count) throws InterruptedException {
-        System.out.println("The quantity of that book in the cart should increase to {int}");
+    @Then("the quantity of that book in the cart should increase to {string}")
+    public void theQuantityOfThatBookInTheCartShouldIncreaseBy(String numOfBooks) throws InterruptedException {
         String cartCount = bookPage.getCartCount();
         System.out.println("Cart count is: " + cartCount);
-        MatcherAssert.assertThat(cartCount, Matchers.is((int)count));
+        MatcherAssert.assertThat(cartCount, Matchers.is(numOfBooks));
     }
 }
