@@ -46,7 +46,7 @@ public class TestBase {
                 WebDriverManager.firefoxdriver().setup();
 
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless"); // Remove this line if you want a visible window
+//                options.addArguments("--headless"); // Remove this line if you want a visible window
 
                 driver = new FirefoxDriver(options);
 

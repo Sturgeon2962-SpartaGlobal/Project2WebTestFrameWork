@@ -2,7 +2,10 @@ package pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class BookPage {
     public WebDriver driver;
@@ -18,7 +21,7 @@ public class BookPage {
         driver.findElement(addToCartButton).click();
     }
 
-    public int getCartCount() {
-        return driver.findElements(cartCount).size();
+    public String getCartCount() {
+        return driver.findElement(cartCount).getText();
     }
 }
