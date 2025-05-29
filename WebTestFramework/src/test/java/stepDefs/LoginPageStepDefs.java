@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.it.Ma;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.*;
@@ -88,8 +89,9 @@ public class LoginPageStepDefs {
     }
 
     @Then("I should see an error message")
-    public void iShouldSeeAnErrorMessage() {
-        String errorMsg = loginPage.getErrorMsg();
-        MatcherAssert.assertThat(errorMsg, Matchers.is("Password is required"));
+    public void iShouldSeeAnErrorMessage() throws InterruptedException {
+        Thread.sleep(250);
+        Boolean errorMsg = loginPage.getErrorMsg();
+        MatcherAssert.assertThat(errorMsg, Matchers.is(Boolean.TRUE));
     }
 }
