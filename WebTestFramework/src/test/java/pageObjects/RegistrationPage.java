@@ -51,7 +51,7 @@ public class RegistrationPage {
     }
 
     public String GetUserNameErrorMsg() throws InterruptedException {
-        Thread.sleep(250);
+        Thread.sleep(500);
         return driver.findElement(userNameErrorMsg).getText();
     }
 
