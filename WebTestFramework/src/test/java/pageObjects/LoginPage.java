@@ -19,6 +19,7 @@ public class LoginPage {
     private By userNameInput = By.cssSelector("input[placeholder*=\"Username\"]");
     private By passwordInput = By.cssSelector("input[placeholder*=\"Password\"]");
     private By submitForm = By.xpath("//form/mat-card-actions/button");
+    private By errorMsg = By.xpath("//form/mat-form-field[2]/div[2]/div/mat-error");
 
     public void selectRegisterBtn() {
         driver.findElement(registerBtn).click();
@@ -35,4 +36,9 @@ public class LoginPage {
 //        driver.findElement(passwordInput).sendKeys(Keys.RETURN);
         driver.findElement(submitForm).click();
     }
+
+    public String getErrorMsg() {
+        return driver.findElement(errorMsg).getText();
+    }
+
 }

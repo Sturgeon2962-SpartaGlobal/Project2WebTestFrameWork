@@ -3,6 +3,7 @@ package stepDefs;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +13,7 @@ import utils.TestContextSetup;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.regex.Matcher;
 
 public class LoginPageStepDefs {
     TestContextSetup testContextSetup;
@@ -66,4 +68,28 @@ public class LoginPageStepDefs {
         loginPage.SubmitLoginForm();
     }
 
+    @When("I enter incorrect credentials")
+    public void iEnterIncorrectCredentials() {
+        loginPage.CompleteLoginForm("ThisIsInvalid", "ValidPa55word!");
+
+    }
+
+    @Then("I should stay on the login page")
+    public void iShouldStayOnTheLoginPage() throws IOException {
+        wait.until(ExpectedConditions.urlToBe("https://bookcart.azurewebsites.net/login"));
+        String actualURL = testContextSetup.testBase.WebDriverManager().getCurrentUrl();
+        String expectedURL = "https://bookcart.azurewebsites.net/login";
+        MatcherAssert.assertThat(actualURL, Matchers.is(expectedURL));
+    }
+
+    @When("I enter username but no password")
+    public void iEnterUsernameButNoPassword() {
+        loginPage.CompleteLoginForm("SoftwareTest1", "");
+    }
+
+    @Then("I should see an error message")
+    public void iShouldSeeAnErrorMessage() {
+        String errorMsg = loginPage.getErrorMsg();
+        MatcherAssert.assertThat(errorMsg, Matchers.is("Password is required"));
+    }
 }

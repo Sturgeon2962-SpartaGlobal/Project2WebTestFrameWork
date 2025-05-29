@@ -11,3 +11,13 @@ Feature: User Login
     When I complete the log-in form with valid log-in credentials
     And I click the login button
     Then I should be redirected to the homepage
+
+  Scenario: Invalid Login
+    Given I have navigated to the login page
+    When I enter incorrect credentials
+    Then I should stay on the login page
+
+  Scenario: No Password
+    Given I have navigated to the login page
+    When I enter username but no password
+    Then I should see an error message
