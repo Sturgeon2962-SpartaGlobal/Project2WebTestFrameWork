@@ -1,9 +1,9 @@
-@BasicSuite
 @CheckoutProcess
 Feature: Checkout Process
   As a user,
   I want to checkout so that I can complete my purchase.
 
+  @ValidPurchase
   Scenario: Complete A purchase
     Given I am logged in
     And I have books in my cart
@@ -12,6 +12,7 @@ Feature: Checkout Process
     And I confirm the purchase
     Then I should see an order confirmation message
 
+  @InvalidPurchase
   Scenario: Attempt to purchase with a incomplete field
     Given I am logged in
     And I have books in my cart

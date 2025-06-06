@@ -1,16 +1,15 @@
-@BasicSuite
 @AddToCart
 Feature: AddToCart
   As a user,
   I want to add books to my cart so that I can purchase them later.
 
-  @Suite2
+  @SingleBook
   Scenario: Add a single book to cart
     Given I am viewing a book's detail page
     When I click on Add to Cart button
     Then the item should appear in my cart with quantity "1"
 
-  @Suite2
+  @MultipleBooks
   Scenario: Add the same book multiple times
     Given I have already added a book to the cart
     When I click on Add to Cart button

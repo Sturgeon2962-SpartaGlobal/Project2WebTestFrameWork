@@ -21,7 +21,8 @@ public class LoginPage {
         driver.findElement(registerBtn).click();
     }
 
-    public void CompleteLoginForm(String username, String password) {
+    public void CompleteLoginForm(String username, String password) throws InterruptedException {
+        Thread.sleep(250);
         driver.findElement(userNameInput).sendKeys(username);
         if (password.isEmpty()) {
             driver.findElement(passwordInput).sendKeys(Keys.ENTER);

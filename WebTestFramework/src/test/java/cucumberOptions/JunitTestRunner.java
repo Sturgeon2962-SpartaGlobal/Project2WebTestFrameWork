@@ -9,9 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/java/features",
         glue = "stepDefs",
         monochrome = true,
-        tags= "@UserLogin",
-        plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-        "rerun:target/failed_scenarios.txt"}
+        plugin = { "pretty", "html:target/cucumber-reports.html" }
 )
 public class JunitTestRunner {
 }

@@ -70,7 +70,7 @@ public class LoginPageStepDefs {
     }
 
     @When("I enter incorrect credentials")
-    public void iEnterIncorrectCredentials() {
+    public void iEnterIncorrectCredentials() throws InterruptedException {
         loginPage.CompleteLoginForm("ThisIsInvalid", "ValidPa55word!");
 
     }
@@ -84,7 +84,7 @@ public class LoginPageStepDefs {
     }
 
     @When("I enter username but no password")
-    public void iEnterUsernameButNoPassword() {
+    public void iEnterUsernameButNoPassword() throws InterruptedException {
         loginPage.CompleteLoginForm("SoftwareTest1", "");
     }
 
