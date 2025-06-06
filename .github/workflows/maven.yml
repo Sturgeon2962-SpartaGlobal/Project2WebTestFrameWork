@@ -1,56 +1,56 @@
 name: Run Tests
 
 on:
-  pull_request:
-    branches:
-      - "main"
+    pull_request:
+        branches:
+            - "main"
 
 permissions:
-  pull-requests: write
-  checks: write
-  contents: read
+    pull-requests: write
+    checks: write
+    contents: read
 
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
+    build-test:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      # --------  Setup jdk --------
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          distribution: "temurin"
-          java-version: "21"
+            # --------  Setup jdk --------
+            - name: Set up JDK 21
+              uses: actions/setup-java@v3
+              with:
+                  distribution: "temurin"
+                  java-version: "21"
 
-      # --------  Run Tests --------
-      - name: Run Automated Tests
-        working-directory: WebTestFramework
-        run: mvn test --batch-mode --fail-at-end
+            # --------  Run Tests --------
+            - name: Run Automated Tests
+              working-directory: WebTestFramework
+              run: mvn test --batch-mode --fail-at-end
 
-      # --------  Upload Artifacts --------
-      - name: Upload Test Results
-        if: always()  # ensure it runs even if tests fail
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: WebTestFramework/test-output/
+            # --------  Upload Artifacts --------
+            - name: Upload Test Results
+              if: always() # ensure it runs even if tests fail
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results
+                  path: WebTestFramework/target/cucumber-reports.html
 
-      # ------- merge if tests passed -----
-      - name: Auto merge pull request on test pass
-        if: ${{ success() && github.event_name == 'pull_request' }}
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{secrets.PAT_GITHUB}}
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            const response = await github.rest.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: prNumber,
-              commit_title: 'Auto-merged by CI',
-              merge_method: 'merge'
-            });
-            console.log(response.data);
+            # ------- merge if tests passed -----
+            - name: Auto merge pull request on test pass
+              if: ${{ success() && github.event_name == 'pull_request' }}
+              uses: actions/github-script@v5
+              with:
+                  github-token: ${{secrets.PAT_GITHUB}}
+                  script: |
+                      const prNumber = context.payload.pull_request.number;
+                      const response = await github.rest.pulls.merge({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: prNumber,
+                        commit_title: 'Auto-merged by CI',
+                        merge_method: 'merge'
+                      });
+                      console.log(response.data);
